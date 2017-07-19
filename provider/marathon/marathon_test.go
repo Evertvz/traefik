@@ -276,18 +276,16 @@ func TestMarathonLoadConfigNonAPIErrors(t *testing.T) {
 
 func TestMarathonTaskFilter(t *testing.T) {
 	cases := []struct {
-		desc             string
-		task             marathon.Task
-		application      marathon.Application
-		expected         bool
-		exposedByDefault bool
+		desc        string
+		task        marathon.Task
+		application marathon.Application
+		expected    bool
 	}{
 		{
-			desc:             "missing port",
-			task:             createTask(),
-			application:      createApplication(),
-			expected:         false,
-			exposedByDefault: true,
+			desc:        "missing port",
+			task:        createTask(),
+			application: createApplication(),
+			expected:    false,
 		},
 		{
 			desc: "task not running",
@@ -295,16 +293,14 @@ func TestMarathonTaskFilter(t *testing.T) {
 				taskPorts(80),
 				state(taskStateStaging),
 			),
-			application:      createApplication(appPorts(80)),
-			expected:         false,
-			exposedByDefault: true,
+			application: createApplication(appPorts(80)),
+			expected:    false,
 		},
 		{
-			desc:             "existing port",
-			task:             createTask(taskPorts(80)),
-			application:      createApplication(appPorts(80)),
-			expected:         true,
-			exposedByDefault: true,
+			desc:        "existing port",
+			task:        createTask(taskPorts(80)),
+			application: createApplication(appPorts(80)),
+			expected:    true,
 		},
 		{
 			desc: "ambiguous port specification",
@@ -314,8 +310,7 @@ func TestMarathonTaskFilter(t *testing.T) {
 				label(types.LabelPort, "443"),
 				label(types.LabelPortIndex, "1"),
 			),
-			expected:         false,
-			exposedByDefault: true,
+			expected: false,
 		},
 		{
 			desc: "healthcheck available",
@@ -324,8 +319,7 @@ func TestMarathonTaskFilter(t *testing.T) {
 				appPorts(80),
 				healthChecks(marathon.NewDefaultHealthCheck()),
 			),
-			expected:         true,
-			exposedByDefault: true,
+			expected: true,
 		},
 		{
 			desc: "healthcheck result false",
@@ -337,8 +331,7 @@ func TestMarathonTaskFilter(t *testing.T) {
 				appPorts(80),
 				healthChecks(marathon.NewDefaultHealthCheck()),
 			),
-			expected:         false,
-			exposedByDefault: true,
+			expected: false,
 		},
 		{
 			desc: "healthcheck results mixed",
@@ -350,8 +343,7 @@ func TestMarathonTaskFilter(t *testing.T) {
 				appPorts(80),
 				healthChecks(marathon.NewDefaultHealthCheck()),
 			),
-			expected:         false,
-			exposedByDefault: true,
+			expected: false,
 		},
 		{
 			desc: "healthcheck result true",
@@ -363,8 +355,7 @@ func TestMarathonTaskFilter(t *testing.T) {
 				appPorts(80),
 				healthChecks(marathon.NewDefaultHealthCheck()),
 			),
-			expected:         true,
-			exposedByDefault: true,
+			expected: true,
 		},
 	}
 
