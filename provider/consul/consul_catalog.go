@@ -359,6 +359,7 @@ func (p *CatalogProvider) buildConfig(catalog []catalogUpdate) *types.Configurat
 		"hasTag":               p.hasTag,
 		"getEntryPoints":       p.getEntryPoints,
 		"hasMaxconnAttributes": p.hasMaxconnAttributes,
+		//"getSticky":            p.getSticky,
 	}
 
 	allNodes := []*api.ServiceEntry{}
